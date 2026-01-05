@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Select Subject | Elite Academy</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ===== Theme tokens - ELITE ACADEMY PREMIUM ===== */
+:root {
+  /* Core Colors - Navy & Gold Premium Palette */
+  --navy: #0A2463;           /* Primary brand - Deep Navy */
+  --navy-dark: #06193d;      /* Darker navy for hover */
+  --navy-light: #1E3A8A;     /* Lighter navy variant */
+  --gold: #D4AF37;           /* Premium gold accent */
+  --gold-dark: #B08C1C;      /* Darker gold for hover */
+  --gold-light: #FFD700;     /* Bright gold highlight */
+  
+  /* Supporting Colors */
+  --cream: #F8F5EE;          /* Cream background */
+  --light-gray: #F8F9FA;     /* Light gray for cards */
+  --charcoal: #2D3748;       /* Dark gray for text */
+  --muted: #64748b;          /* Muted text */
+  --teal: #2D9CA3;           /* Accent for CTAs/buttons */
+  --teal-dark: #1F7A80;      /* Darker teal */
+  
+  /* UI Elements */
+  --text: #1E293B;           /* Main text color */
+  --bg: #FFFFFF;             /* Main background */
+  --border: #E5E7EB;         /* Border color */
+  
+  /* Effects */
+  --card-radius: 12px;       /* Increased for premium feel */
+  --btn-radius: 8px;         /* Slightly rounded buttons */
+  --shadow-soft: 0 4px 20px rgba(10, 36, 99, 0.08);  /* Navy-tinted shadow */
+  --shadow-card: 0 10px 30px rgba(10, 36, 99, 0.15); /* Deeper shadow */
+  --shadow-gold: 0 4px 15px rgba(212, 175, 55, 0.2); /* Gold glow */
+}
+
+* { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
+
+body {
+  font-family: 'Inter', 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 80px auto;
+  padding: 0 24px;
+  animation: fadeIn 0.6s ease forwards;
+}
+
+/* Header Section */
+.header {
+  text-align: center;
+  margin-bottom: 60px;
+  position: relative;
+}
+
+.premium-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: var(--navy);
+  font-weight: 700;
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-gold);
+}
+
+h1 {
+  text-align: center;
+  color: var(--navy);
+  font-weight: 900;
+  margin-bottom: 16px;
+  font-size: 42px;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+
+h1 span {
+  color: var(--gold);
+  position: relative;
+}
+
+h1 span::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--muted);
+  margin-bottom: 10px;
+  font-size: 18px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+
+.page-description {
+  text-align: center;
+  color: var(--muted);
+  font-size: 15px;
+  max-width: 600px;
+  margin: 0 auto 40px;
+  font-weight: 500;
+}
+
+/* Category Navigation */
+.category-nav {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  padding-bottom: 30px;
+  border-bottom: 2px solid var(--light-gray);
+}
+
+.category-btn {
+  background: var(--light-gray);
+  color: var(--navy);
+  border: none;
+  padding: 12px 28px;
+  border-radius: var(--btn-radius);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 15px;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.3px;
+}
+
+.category-btn:hover {
+  background: rgba(10, 36, 99, 0.1);
+  transform: translateY(-2px);
+}
+
+.category-btn.active {
+  background: linear-gradient(135deg, var(--navy), var(--navy-light));
+  color: white;
+  box-shadow: var(--shadow-soft);
+}
+
+.category-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+
+/* Subject Grid */
+.subject-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
+  margin-bottom: 60px;
+}
+
+.subject-card {
+  background: white;
+  padding: 40px 30px;
+  border-radius: var(--card-radius);
+  text-align: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+  transition: all 0.4s ease;
+  border: 1px solid rgba(229, 231, 235, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.subject-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--navy), var(--gold));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.subject-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-card);
+  border-color: var(--navy);
+}
+
+.subject-card:hover::before {
+  opacity: 1;
+}
+
+.subject-icon {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, var(--navy-light), var(--navy));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  color: white;
+  font-size: 28px;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.3s ease;
+}
+
+.subject-card:hover .subject-icon {
+  transform: scale(1.1);
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+}
+
+.subject-card h3 {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 12px;
+  letter-spacing: -0.3px;
+}
+
+.subject-card p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  min-height: 40px;
+}
+
+.subject-meta {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.subject-count {
+  background: var(--light-gray);
+  padding: 4px 10px;
+  border-radius: 4px;
+  color: var(--navy);
+}
+
+/* CTA Section */
+.cta-section {
+  text-align: center;
+  padding: 40px;
+  background: linear-gradient(135deg, var(--navy), var(--navy-dark));
+  border-radius: var(--card-radius);
+  color: white;
+  margin-bottom: 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+  z-index: 1;
+}
+
+.cta-content {
+  position: relative;
+  z-index: 2;
+}
+
+.cta-section h2 {
+  color: white;
+  margin-bottom: 16px;
+  font-size: 32px;
+}
+
+.cta-section p {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 30px;
+  font-size: 18px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--gold);
+  color: var(--navy);
+  font-weight: 700;
+  padding: 18px 40px;
+  border-radius: var(--btn-radius);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  box-shadow: var(--shadow-gold);
+}
+
+.cta-btn:hover {
+  background: var(--gold-light);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+}
+
+/* Loading State */
+.loading {
+  text-align: center;
+  margin: 100px auto;
+  color: var(--muted);
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid var(--light-gray);
+  border-top-color: var(--navy);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Breadcrumb Navigation */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.breadcrumb a {
+  color: var(--navy);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.breadcrumb a:hover {
+  color: var(--gold);
+}
+
+.breadcrumb span {
+  color: var(--muted);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .container {
+    margin: 60px auto;
+  }
+  
+  h1 {
+    font-size: 36px;
+  }
+  
+  .subject-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin: 40px auto;
+    padding: 0 16px;
+  }
+  
+  h1 {
+    font-size: 32px;
+  }
+  
+  .subtitle {
+    font-size: 16px;
+  }
+  
+  .category-nav {
+    gap: 8px;
+  }
+  
+  .category-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+  
+  .subject-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+  }
+  
+  .subject-card {
+    padding: 30px 20px;
+  }
+  
+  .subject-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+  }
+  
+  .cta-section {
+    padding: 30px 20px;
+  }
+  
+  .cta-section h2 {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    margin: 30px auto;
+  }
+  
+  h1 {
+    font-size: 28px;
+  }
+  
+  .subject-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .category-nav {
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .category-btn {
+    white-space: nowrap;
+  }
+  
+  .cta-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1 id="pageTitle">Choose Subject</h1>
+  <p class="subtitle" id="pageSubtitle">Select a subject to continue</p>
+
+  <p class="loading" id="loadingText">Loading subjects...</p>
+
+  <div class="subject-grid" id="subjectGrid" style="display:none;"></div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+// 🔑 Firebase config
+const firebaseConfig = {
+  apiKey: "AIzaSyDFNh_CcKfvrffJUMIHxSJt7TUJl9J4gqk",
+  authDomain: "elite-academy-b7316.firebaseapp.com",
+  projectId: "elite-academy-b7316",
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// DOM references
+const subjectGrid = document.getElementById("subjectGrid");
+const loadingText = document.getElementById("loadingText");
+const pageTitle = document.getElementById("pageTitle");
+const pageSubtitle = document.getElementById("pageSubtitle");
+
+// Get query params
+const params = new URLSearchParams(window.location.search);
+const type = params.get("type") || "classwork";  // what user wants to access
+const studentIdFromUrl = params.get("uid");       // present if admin clicked on a student
+
+pageTitle.textContent = `Choose Subject`;
+pageSubtitle.textContent = `Select a subject for ${type.replace("-", " ")}`;
+
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    window.location.href = "/loginpage.html";
+    return;
+  }
+
+  try {
+    // If admin is managing a student, use the UID from URL
+    const studentId = studentIdFromUrl || user.uid;
+
+    const studentRef = doc(db, "users", studentId);
+    const studentSnap = await getDoc(studentRef);
+
+    if (!studentSnap.exists()) {
+      alert("Student data not found.");
+      return;
+    }
+
+    const studentData = studentSnap.data();
+    const subjects = studentData.subjects || [];
+
+    if (!subjects.length) {
+      alert("No subjects assigned.");
+      return;
+    }
+
+    // Build the subject cards
+    subjectGrid.innerHTML = "";
+    subjects.forEach(subject => {
+      const card = document.createElement("div");
+      card.className = "subject-card";
+      card.innerHTML = `<h3>${subject}</h3>`;
+
+      card.onclick = () => {
+        // Redirect to subject-work.html with studentId (if admin) and subject
+        const url = studentIdFromUrl 
+          ? `/subject-work.html?uid=${studentId}&subject=${encodeURIComponent(subject)}&type=${type}`
+          : `/subject-work.html?subject=${encodeURIComponent(subject)}&type=${type}`;
+        window.location.href = url;
+      };
+
+      subjectGrid.appendChild(card);
+    });
+
+    loadingText.style.display = "none";
+    subjectGrid.style.display = "grid";
+
+  } catch (error) {
+    console.error(error);
+    alert("Failed to load subjects.");
+  }
+});
+</script>
+
+</body>
+</html>

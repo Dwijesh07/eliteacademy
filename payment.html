@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elite Academy | Payment</title>
+  <script src="https://js.stripe.com/v3/"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0d1117;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .box {
+      background: #161b22;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(255,255,255,0.1);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+    }
+    button {
+      background: #635bff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 20px;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #5047ff;
+    }
+  </style>
+</head>
+<body>
+<section class="payment" id="payment">
+  <div class="container text-center">
+    <h2>Pay for a Session</h2>
+    <p>Click below to make a secure payment through Stripe.</p>
+    <a href="https://buy.stripe.com/test_14A6oB9LRejV4TB4kffIs00" target="_blank" rel="noopener noreferrer">
+      <button style="
+        background-color: #635bff;
+        color: white;
+        padding: 15px 30px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 20px;
+      ">
+        Pay Now
+      </button>
+    </a>
+  </div>
+</section>
