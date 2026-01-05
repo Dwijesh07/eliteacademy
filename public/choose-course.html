@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elite Academy — Choose Course</title>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ===== Theme tokens - ELITE ACADEMY PREMIUM ===== */
+:root {
+  /* Core Colors - Navy & Gold Premium Palette */
+  --navy: #0A2463;           /* Primary brand - Deep Navy */
+  --navy-dark: #06193d;      /* Darker navy for hover */
+  --navy-light: #1E3A8A;     /* Lighter navy variant */
+  --gold: #D4AF37;           /* Premium gold accent */
+  --gold-dark: #B08C1C;      /* Darker gold for hover */
+  --gold-light: #FFD700;     /* Bright gold highlight */
+  
+  /* Supporting Colors */
+  --cream: #F8F5EE;          /* Cream background */
+  --light-gray: #F8F9FA;     /* Light gray for cards */
+  --charcoal: #2D3748;       /* Dark gray for text */
+  --muted: #64748b;          /* Muted text */
+  --teal: #2D9CA3;           /* Accent for CTAs/buttons */
+  --teal-dark: #1F7A80;      /* Darker teal */
+  
+  /* UI Elements */
+  --text: #1E293B;           /* Main text color */
+  --bg: #FFFFFF;             /* Main background */
+  --border: #E5E7EB;         /* Border color */
+  
+  /* Effects */
+  --card-radius: 12px;       /* Increased for premium feel */
+  --btn-radius: 8px;         /* Slightly rounded buttons */
+  --shadow-soft: 0 4px 20px rgba(10, 36, 99, 0.08);  /* Navy-tinted shadow */
+  --shadow-card: 0 10px 30px rgba(10, 36, 99, 0.15); /* Deeper shadow */
+  --shadow-gold: 0 4px 15px rgba(212, 175, 55, 0.2); /* Gold glow */
+}
+
+* { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
+
+body {
+  font-family: 'Inter', 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 0 24px;
+}
+
+/* Loading State */
+#loadingText {
+  text-align: center;
+  margin: 100px auto;
+  color: var(--navy);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* Main Content Box - Kept your JS will handle display */
+.box {
+  background: white;
+  border-radius: var(--card-radius);
+  padding: 48px 40px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(229, 231, 235, 0.5);
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 0.6s ease forwards;
+}
+
+.box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--navy), var(--gold));
+  border-radius: var(--card-radius) var(--card-radius) 0 0;
+}
+
+/* Header */
+h2 {
+  text-align: center;
+  color: var(--navy);
+  margin-bottom: 16px;
+  font-size: 36px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  text-align: center;
+  margin-bottom: 40px;
+  color: var(--muted);
+  font-size: 18px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+
+/* Grade Sections - Your JS controls display: block */
+.grade-section {
+  margin-bottom: 40px;
+  border: 2px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 30px;
+  background: white;
+  /* Your JS will set display: block for relevant sections */
+  display: none; 
+  animation: slideIn 0.5s ease forwards;
+}
+
+.grade-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid var(--light-gray);
+  position: relative;
+  display: inline-block;
+}
+
+.grade-title::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+
+/* Subject List - Original structure preserved */
+.subject-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* Subject Items - Enhanced styling but same HTML structure */
+.subject {
+  display: flex;
+  align-items: center;
+  padding: 18px 20px;
+  background: var(--light-gray);
+  border-radius: var(--card-radius);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.subject:hover {
+  border-color: var(--navy);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-soft);
+  background: white;
+}
+
+/* Keep original checkbox but style it better */
+.subject input[type="checkbox"] {
+  margin-right: 15px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--navy); /* Modern browser support */
+}
+
+/* Custom styling for older browsers */
+.subject input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 2px solid var(--border);
+  border-radius: 5px;
+  position: relative;
+}
+
+.subject input[type="checkbox"]:checked {
+  background: var(--navy);
+  border-color: var(--navy);
+}
+
+.subject input[type="checkbox"]:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.subject:hover input[type="checkbox"] {
+  border-color: var(--navy);
+}
+
+/* Selected state for subjects */
+.subject input[type="checkbox"]:checked ~ * {
+  color: var(--navy-dark);
+  font-weight: 700;
+}
+
+/* Continue Button */
+button[type="submit"] {
+  margin-top: 30px;
+  width: 100%;
+  padding: 18px;
+  background: linear-gradient(135deg, var(--navy), var(--navy-light));
+  color: white;
+  border: none;
+  border-radius: var(--btn-radius);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+button[type="submit"]::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.7s ease;
+}
+
+button[type="submit"]:hover {
+  background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(10, 36, 99, 0.2);
+}
+
+button[type="submit"]:hover::after {
+  left: 100%;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes slideIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .container {
+    margin: 40px auto;
+  }
+  
+  h2 {
+    font-size: 32px;
+  }
+  
+  .subject-list {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin: 30px auto;
+    padding: 0 16px;
+  }
+  
+  .box {
+    padding: 36px 24px;
+  }
+  
+  h2 {
+    font-size: 28px;
+  }
+  
+  .subtitle {
+    font-size: 16px;
+  }
+  
+  .grade-section {
+    padding: 24px 20px;
+  }
+  
+  .subject-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .subject {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .box {
+    padding: 32px 20px;
+  }
+  
+  h2 {
+    font-size: 24px;
+  }
+  
+  .grade-title {
+    font-size: 20px;
+  }
+  
+  button[type="submit"] {
+    padding: 16px;
+    font-size: 15px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <p id="loadingText">Loading subjects...</p>
+  <div class="box" id="courseBox">
+    <h2>Select Your Course Subjects</h2>
+    <p class="subtitle">Choose the subjects your child will be studying</p>
+
+    <form id="courseForm">
+
+      <!-- PREP -->
+      <div class="grade-section">
+        <div class="grade-title">Prep (Foundation)</div>
+        <div class="subject-list">
+          <label class="subject"><input type="checkbox" value="Prep English"> English – Early reading & writing</label>
+          <label class="subject"><input type="checkbox" value="Prep Mathematics"> Mathematics – Counting & shapes</label>
+          <label class="subject"><input type="checkbox" value="Prep Digital Awareness"> Digital Awareness</label>
+          <label class="subject"><input type="checkbox" value="Prep Creative Learning"> Creative Learning</label>
+        </div>
+      </div>
+
+      <!-- YEAR 1–6 -->
+      <div class="grade-section">
+        <div class="grade-title">Years 1 – 6</div>
+        <div class="subject-list">
+          <label class="subject"><input type="checkbox" value="English"> English</label>
+          <label class="subject"><input type="checkbox" value="Mathematics"> Mathematics</label>
+          <label class="subject"><input type="checkbox" value="Science"> Science</label>
+          <label class="subject"><input type="checkbox" value="Digital Technologies"> Digital Technologies</label>
+        </div>
+      </div>
+
+      <!-- YEAR 7–10 -->
+      <div class="grade-section">
+        <div class="grade-title">Years 7 – 10</div>
+        <div class="subject-list">
+          <label class="subject"><input type="checkbox" value="English"> English</label>
+          <label class="subject"><input type="checkbox" value="Mathematics"> Mathematics</label>
+          <label class="subject"><input type="checkbox" value="Science"> Science</label>
+          <label class="subject"><input type="checkbox" value="Computer Science"> Computer Science</label>
+          <label class="subject"><input type="checkbox" value="French"> French</label>
+          <label class="subject"><input type="checkbox" value="Economics"> Economics</label>
+          <label class="subject"><input type="checkbox" value="Accounting"> Accounting</label>
+        </div>
+      </div>
+
+      <!-- YEAR 11–12 -->
+      <div class="grade-section">
+        <div class="grade-title">Years 11 – 12</div>
+        <div class="subject-list">
+          <label class="subject"><input type="checkbox" value="English"> English</label>
+          <label class="subject"><input type="checkbox" value="Mathematical Methods"> Mathematical Methods</label>
+          <label class="subject"><input type="checkbox" value="Specialist Mathematics"> Specialist Mathematics</label>
+          <label class="subject"><input type="checkbox" value="Physics"> Physics</label>
+          <label class="subject"><input type="checkbox" value="Chemistry"> Chemistry</label>
+          <label class="subject"><input type="checkbox" value="Biology"> Biology</label>
+          <label class="subject"><input type="checkbox" value="Economics"> Economics</label>
+          <label class="subject"><input type="checkbox" value="Accounting"> Accounting</label>
+          <label class="subject"><input type="checkbox" value="Computer Science"> Computer Science</label>
+          <label class="subject"><input type="checkbox" value="French"> French</label>
+        </div>
+      </div>
+
+      <!-- NAPLAN -->
+      <div class="grade-section">
+        <div class="grade-title">NAPLAN (Years 3, 5, 7, 9)</div>
+        <div class="subject-list">
+          <label class="subject"><input type="checkbox" value="NAPLAN English"> NAPLAN English</label>
+          <label class="subject"><input type="checkbox" value="NAPLAN Mathematics"> NAPLAN Mathematics</label>
+          <label class="subject"><input type="checkbox" value="NAPLAN Preparation"> NAPLAN Preparation</label>
+        </div>
+      </div>
+
+      <button type="submit">Continue to Dashboard</button>
+    </form>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDFNh_CcKfvrffJUMIHxSJt7TUJl9J4gqk",
+  authDomain: "elite-academy-b7316.firebaseapp.com",
+  projectId: "elite-academy-b7316",
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const form = document.getElementById("courseForm");
+const gradeSections = document.querySelectorAll(".grade-section");
+const courseBox = document.getElementById("courseBox");
+const loadingText = document.getElementById("loadingText");
+
+// Mapping child grades to sections
+const gradeMap = {
+  Prep: ["Prep (Foundation)"],
+  "Year 1": ["Years 1 – 6"],
+  "Year 2": ["Years 1 – 6"],
+  "Year 3": ["Years 1 – 6", "NAPLAN (Years 3, 5, 7, 9)"],
+  "Year 4": ["Years 1 – 6"],
+  "Year 5": ["Years 1 – 6", "NAPLAN (Years 3, 5, 7, 9)"],
+  "Year 6": ["Years 1 – 6"],
+  "Year 7": ["Years 7 – 10", "NAPLAN (Years 3, 5, 7, 9)"],
+  "Year 8": ["Years 7 – 10"],
+  "Year 9": ["Years 7 – 10", "NAPLAN (Years 3, 5, 7, 9)"],
+  "Year 10": ["Years 7 – 10"],
+  "Year 11": ["Years 11 – 12"],
+  "Year 12": ["Years 11 – 12"]
+};
+
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    window.location.href = "/loginpage.html";
+    return;
+  }
+
+  try {
+    const userDocRef = doc(db, "users", user.uid);
+    const snap = await getDoc(userDocRef);
+
+    if (!snap.exists()) {
+      alert("User data not found. Please re-register.");
+      return;
+    }
+
+    const userData = snap.data();
+    const grade = userData.childGrade;
+    const previousSubjects = userData.subjects || [];
+
+    // Show only relevant sections and pre-check subjects
+    gradeSections.forEach(section => {
+      const title = section.querySelector(".grade-title").innerText;
+      if (gradeMap[grade]?.includes(title)) {
+        section.style.display = "block";
+        const checkboxes = section.querySelectorAll("input[type=checkbox]");
+        checkboxes.forEach(cb => {
+          if (previousSubjects.includes(cb.value)) cb.checked = true;
+        });
+      }
+    });
+
+    // Hide loading text, show form
+    loadingText.style.display = "none";
+    courseBox.style.display = "block";
+
+    // Form submission
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const selectedSubjects = [...document.querySelectorAll("input[type=checkbox]:checked")]
+        .map(cb => cb.value);
+
+      if (selectedSubjects.length === 0) {
+        alert("Please select at least one subject.");
+        return;
+      }
+
+await setDoc(userDocRef, {
+  subjects: selectedSubjects,
+  onboarded: true
+}, { merge: true });
+
+      window.location.href = "/dashboard.html";
+    });
+
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    alert("Failed to load course data. Please try again.");
+  }
+});
+</script>
+
+</body>
+</html>

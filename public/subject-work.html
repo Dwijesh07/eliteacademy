@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Subject Work | Elite Academy</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ===== Theme tokens - ELITE ACADEMY PREMIUM ===== */
+:root {
+  /* Core Colors - Navy & Gold Premium Palette */
+  --navy: #0A2463;           /* Primary brand - Deep Navy */
+  --navy-dark: #06193d;      /* Darker navy for hover */
+  --navy-light: #1E3A8A;     /* Lighter navy variant */
+  --gold: #D4AF37;           /* Premium gold accent */
+  --gold-dark: #B08C1C;      /* Darker gold for hover */
+  --gold-light: #FFD700;     /* Bright gold highlight */
+  
+  /* Supporting Colors */
+  --cream: #F8F5EE;          /* Cream background */
+  --light-gray: #F8F9FA;     /* Light gray for cards */
+  --charcoal: #2D3748;       /* Dark gray for text */
+  --muted: #64748b;          /* Muted text */
+  --teal: #2D9CA3;           /* Accent for CTAs/buttons */
+  --teal-dark: #1F7A80;      /* Darker teal */
+  
+  /* UI Elements */
+  --text: #1E293B;           /* Main text color */
+  --bg: #FFFFFF;             /* Main background */
+  --border: #E5E7EB;         /* Border color */
+  
+  /* Effects */
+  --card-radius: 12px;       /* Increased for premium feel */
+  --btn-radius: 8px;         /* Slightly rounded buttons */
+  --shadow-soft: 0 4px 20px rgba(10, 36, 99, 0.08);  /* Navy-tinted shadow */
+  --shadow-card: 0 10px 30px rgba(10, 36, 99, 0.15); /* Deeper shadow */
+  --shadow-gold: 0 4px 15px rgba(212, 175, 55, 0.2); /* Gold glow */
+}
+
+body {
+  font-family: 'Inter', 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--cream);
+  margin: 0;
+  padding: 20px;
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1400px;
+  margin: auto;
+  animation: fadeIn 0.6s ease forwards;
+}
+
+h1 {
+  color: var(--navy);
+  font-weight: 900;
+  font-size: 32px;
+  margin-bottom: 30px;
+  letter-spacing: -0.5px;
+  padding-bottom: 15px;
+  border-bottom: 3px solid var(--gold);
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+/* Card Styles */
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: var(--card-radius);
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(229, 231, 235, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--navy), var(--gold));
+}
+
+.card h3 {
+  color: var(--navy);
+  font-weight: 800;
+  font-size: 22px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+.card h3 i {
+  color: var(--gold);
+}
+
+/* ===== CENTERED LARGE WEEK TABS ===== */
+.week-tabs-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.week-tabs-header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.week-tabs-header h3 {
+  color: var(--navy);
+  font-weight: 800;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.week-tabs-header h3 i {
+  color: var(--gold);
+  font-size: 22px;
+}
+
+.week-tabs-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.week-tab-large {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px 15px;
+  background: var(--light-gray);
+  color: var(--navy);
+  border: none;
+  border-radius: var(--card-radius);
+  cursor: pointer;
+  transition: all 0.4s ease;
+  text-align: center;
+  min-height: 140px;
+  position: relative;
+  overflow: hidden;
+}
+
+.week-tab-large:hover {
+  background: rgba(10, 36, 99, 0.1);
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: var(--shadow-soft);
+}
+
+.week-tab-large.active {
+  background: linear-gradient(135deg, var(--navy), var(--navy-light));
+  color: white;
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: var(--shadow-card);
+}
+
+.week-tab-large.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: var(--gold);
+}
+
+/* Large Week Icon */
+.week-icon-large {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, var(--navy-light), var(--navy));
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 28px;
+  font-weight: 900;
+  margin-bottom: 15px;
+  transition: all 0.4s ease;
+  box-shadow: var(--shadow-soft);
+}
+
+.week-tab-large:hover .week-icon-large {
+  transform: scale(1.1) rotate(5deg);
+  background: linear-gradient(135deg, var(--navy), var(--navy-dark));
+}
+
+.week-tab-large.active .week-icon-large {
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: var(--navy);
+  transform: scale(1.15) rotate(0deg);
+  box-shadow: var(--shadow-gold);
+}
+
+/* Week Label */
+.week-label {
+  font-weight: 800;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.week-date {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.week-tab-large.active .week-date {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Content Status Badge */
+.content-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 12px;
+  height: 12px;
+  background: var(--gold);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.week-tab-large.has-content .content-badge {
+  opacity: 1;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.7; }
+}
+
+/* ===== WEEK CONTENT AREA ===== */
+.week-content-area {
+  margin-top: 30px;
+  min-height: 400px;
+}
+
+/* No Week Selected */
+.no-week-selected-center {
+  text-align: center;
+  padding: 80px 40px;
+  background: white;
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow-soft);
+  border: 2px dashed var(--border);
+  animation: fadeIn 0.6s ease;
+}
+
+.no-week-selected-center i {
+  font-size: 64px;
+  color: var(--navy);
+  margin-bottom: 25px;
+  opacity: 0.6;
+}
+
+.no-week-selected-center h3 {
+  color: var(--navy);
+  font-size: 28px;
+  margin-bottom: 15px;
+  font-weight: 800;
+}
+
+.no-week-selected-center p {
+  color: var(--muted);
+  font-size: 18px;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Week Content Card */
+.week-content-card {
+  display: none;
+  animation: slideUp 0.5s ease forwards;
+}
+
+.week-content-card.active {
+  display: block;
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+/* Week Content Header */
+.week-content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--light-gray);
+}
+
+.week-content-header h4 {
+  color: var(--navy);
+  font-weight: 800;
+  font-size: 26px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.week-content-header h4 i {
+  color: var(--gold);
+  font-size: 22px;
+}
+
+/* Week Stats */
+.week-stats {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--light-gray);
+  border-radius: var(--btn-radius);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--navy);
+}
+
+.stat-item i {
+  color: var(--gold);
+}
+
+/* Section Groups */
+.section-group {
+  margin-bottom: 25px;
+  padding: 25px;
+  background: var(--light-gray);
+  border-radius: var(--card-radius);
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+
+.section-group:hover {
+  background: white;
+  box-shadow: var(--shadow-soft);
+  border-color: var(--navy);
+}
+
+.section-group h5 {
+  color: var(--navy);
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-group h5 i {
+  color: var(--gold);
+  font-size: 16px;
+}
+
+/* Admin/Student Visibility */
+.student-only { 
+  display: none; 
+}
+
+.admin .student-only { 
+  display: none; 
+}
+
+.admin-only { 
+  display: none; 
+}
+
+.admin .admin-only { 
+  display: block; 
+}
+
+body:not(.admin) .student-only { 
+  display: block; 
+}
+
+/* Buttons */
+button {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, var(--navy), var(--navy-light));
+  color: white;
+  border: none;
+  border-radius: var(--btn-radius);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.7s ease;
+}
+
+button:hover {
+  background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(10, 36, 99, 0.2);
+}
+
+button:hover::after {
+  left: 100%;
+}
+
+button.secondary {
+  background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+}
+
+button.secondary:hover {
+  background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+}
+
+/* File Links */
+.file-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--navy);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 10px 16px;
+  background: white;
+  border-radius: var(--btn-radius);
+  border: 2px solid var(--border);
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+.file-link:hover {
+  border-color: var(--navy);
+  background: rgba(10, 36, 99, 0.05);
+  transform: translateY(-2px);
+}
+
+.file-link i {
+  color: var(--gold);
+}
+
+/* Submission Lists */
+.submission-history {
+  margin-top: 20px;
+  padding: 15px;
+  background: white;
+  border-radius: var(--card-radius);
+  border: 1px solid var(--border);
+}
+
+.submission-history strong {
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.submission-history ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.submission-history li {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.submission-history li:last-child {
+  border-bottom: none;
+}
+
+.submission-history li a {
+  color: var(--navy);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.submission-history li a:hover {
+  color: var(--gold);
+}
+
+.submission-history small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* Text Areas */
+textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--border);
+  border-radius: var(--btn-radius);
+  font-family: inherit;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  resize: vertical;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--navy);
+  box-shadow: 0 0 0 3px rgba(10, 36, 99, 0.1);
+}
+
+/* File Inputs */
+input[type="file"] {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--border);
+  border-radius: var(--btn-radius);
+  background: white;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+input[type="file"]:hover {
+  border-color: var(--navy);
+}
+
+/* Feedback Display */
+.feedback-display {
+  padding: 15px;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(212, 175, 55, 0.02));
+  border-radius: var(--btn-radius);
+  border: 2px solid var(--gold);
+  margin-top: 15px;
+  font-style: italic;
+}
+
+/* Small Text */
+small {
+  color: var(--muted);
+  font-size: 13px;
+  display: block;
+  margin-top: 5px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .week-tabs-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .container {
+    padding: 0 16px;
+  }
+  
+  .week-tabs-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .week-tab-large {
+    min-height: 130px;
+    padding: 20px 12px;
+  }
+  
+  .week-icon-large {
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+  }
+  
+  .card {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 16px;
+  }
+  
+  h1 {
+    font-size: 28px;
+  }
+  
+  .week-tabs-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .week-tab-large {
+    min-height: 120px;
+  }
+  
+  .week-icon-large {
+    width: 55px;
+    height: 55px;
+    font-size: 22px;
+    border-radius: 16px;
+  }
+  
+  .week-label {
+    font-size: 15px;
+  }
+  
+  .card {
+    padding: 20px;
+  }
+  
+  .week-content-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .week-stats {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .section-group {
+    padding: 16px;
+  }
+  
+  button {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  
+  input[type="file"] {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  h1 {
+    font-size: 24px;
+  }
+  
+  .week-tabs-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+  }
+  
+  .week-tab-large {
+    min-height: 110px;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 20px;
+    text-align: left;
+  }
+  
+  .week-icon-large {
+    margin-bottom: 0;
+    margin-right: 20px;
+  }
+  
+  .week-content-header h4 {
+    font-size: 22px;
+  }
+  
+  .submission-history li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+  <h1 id="subjectTitle">Loading subject...</h1>
+
+  <!-- Subject Intro -->
+  <div class="card">
+    <h3><i class="fas fa-info-circle"></i> Subject Introduction</h3>
+    <p id="introText">Loading...</p>
+
+    <!-- Admin: Edit intro -->
+    <div class="admin-only">
+      <textarea id="introInput" rows="4" style="width:100%;" placeholder="Enter subject introduction"></textarea>
+      <button id="saveIntroBtn">Save Introduction</button>
+    </div>
+  </div>
+
+ <!-- Weekly Work Tabs -->
+<div class="card">
+  <div class="week-tabs-container">
+    <div class="week-tabs-header">
+      <h3><i class="fas fa-calendar-week"></i> Select a Week</h3>
+      <p style="color: var(--muted); margin-top: 8px;">Click on any week to view its content</p>
+    </div>
+    
+    <!-- Week Tabs Grid -->
+    <div class="week-tabs-grid" id="weekTabsGrid"></div>
+  </div>
+  
+  <!-- Week Content Area -->
+  <div class="week-content-area">
+    <!-- No Week Selected -->
+    <div class="no-week-selected-center" id="noWeekSelected">
+      <i class="fas fa-hand-pointer"></i>
+      <h3>Select a Week</h3>
+      <p>Click on any week card above to view classwork, homework, and assignments for that week</p>
+    </div>
+    
+    <!-- Week Content Cards will be inserted here -->
+    <div id="weekContentCards"></div>
+  </div>
+  
+  <!-- Hidden container for original weeks (needed for your JavaScript) -->
+  <div id="weeksContainer" style="display: none;"></div>
+</div>
+</body>
+
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+// ---------------- Supabase ----------------
+const supabaseUrl = "https://nfqtcmmfomcyhqzgoqmb.supabase.co";
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5mcXRjbW1mb21jeWhxemdvcW1iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY3NTM0NjYsImV4cCI6MjA4MjMyOTQ2Nn0.YIxlzu5wdUBZlCnY4eTab3x4SybheO1E2d7M1TBZxWo"; // replace with your actual key
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+// ---------------- Firebase ----------------
+const firebaseConfig = {
+  apiKey: "AIzaSyDFNh_CcKfvrffJUMIHxSJt7TUJl9J4gqk",
+  authDomain: "elite-academy-b7316.firebaseapp.com",
+  projectId: "elite-academy-b7316",
+  storageBucket: "elite-academy-b7316.appspot.com",
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// ---------------- DOM Elements ----------------
+const subjectTitleEl = document.getElementById("subjectTitle");
+const introTextEl = document.getElementById("introText");
+const introInput = document.getElementById("introInput");
+const saveIntroBtn = document.getElementById("saveIntroBtn");
+const weeksContainer = document.getElementById("weeksContainer");
+
+const params = new URLSearchParams(window.location.search);
+const subject = params.get("subject") || "Unknown Subject";
+const studentIdFromUrl = params.get("uid");
+subjectTitleEl.textContent = subject;
+
+// ---------------- Supabase upload function ----------------
+async function uploadFileSupabase(file, path) {
+  const { error } = await supabase.storage.from("student-files").upload(path, file, { upsert: true });
+  if (error) throw error;
+
+  const { data } = supabase.storage.from("student-files").getPublicUrl(path);
+  return data.publicUrl;
+}
+
+// ---------------- Auth & Page Setup ----------------
+onAuthStateChanged(auth, async (user) => {
+  if (!user) { window.location.href = "/loginpage.html"; return; }
+  const uid = user.uid;
+  const studentId = studentIdFromUrl || uid;
+
+  const userSnap = await getDoc(doc(db, "users", uid));
+  const role = (userSnap.exists() && userSnap.data().role) || "student";
+  if (role === "admin") document.body.classList.add("admin");
+
+  const subjectRef = doc(db, "students_subjects", `${studentId}_${subject}`);
+  const subjectSnap = await getDoc(subjectRef);
+  if (!subjectSnap.exists()) {
+  await setDoc(subjectRef, {
+    studentId: studentId,
+    subject: subject,
+    createdAt: Date.now()
+  });
+}
+  const studentData = subjectSnap.exists() ? subjectSnap.data() : {};
+  
+  // Subject intro
+  introTextEl.textContent = studentData.intro || "No introduction yet.";
+  if (role === "admin") introInput.value = studentData.intro || "";
+
+  saveIntroBtn?.addEventListener("click", async () => {
+    const text = introInput.value;
+    await setDoc(subjectRef, { intro: text }, { merge: true });
+    introTextEl.textContent = text;
+    alert("Introduction saved!");
+  });
+
+  async function getFreshWeekData(subjectRef, weekKey) {
+  const snap = await getDoc(subjectRef);
+  return (snap.exists() && snap.data()[weekKey]) || {};
+}
+
+  // Build 12 weeks
+  weeksContainer.innerHTML = "";
+  for (let week = 1; week <= 12; week++) {
+    const div = document.createElement("div");
+    div.className = "week";
+    div.innerHTML = `
+      <h4>Week ${week}</h4>
+      <div class="admin-only">
+        <input type="file" class="classworkFile">
+        <button class="uploadClassworkBtn">Upload Classwork</button>
+      </div>
+      <div class="admin-only">
+        <input type="file" class="homeworkFile">
+        <button class="uploadHomeworkBtn">Upload Homework</button>
+      </div>
+      <div><strong>Student view:</strong></div>
+      <div class="studentView">
+        <p>Classwork file: <span class="classworkLink">Loading...</span></p>
+        <p>Homework file: <span class="homeworkLink">Loading...</span></p> 
+      </div>
+      <div class="student-only">
+  <p>
+    Submit your homework:
+    <input type="file" class="studentHomeworkFile">
+    <button class="submitHomeworkBtn">Submit</button>
+  </p>
+</div>
+<div class="submissionHistory">
+  <strong>Your submissions:</strong>
+  <ul class="submissionList"></ul>
+</div>
+
+<div class="student-only">
+  <p>
+    <strong>Your submission:</strong>
+    <span class="studentSubmissionLink">No submission yet</span>
+  </p>
+</div>
+
+<div class="admin-only">
+  <p>
+    Submitted homework:
+    <span class="submittedHomeworkLink">No submission</span>
+  </p>
+</div>
+<div class="admin-only">
+  <strong>Student submissions:</strong>
+  <ul class="adminSubmissionList">
+    <li>No submissions yet</li>
+  </ul>
+</div>
+      <div class="admin-only">
+        <h5>Feedback & Grade</h5>
+        <textarea class="feedbackInput" rows="3" style="width:100%;" placeholder="Enter feedback"></textarea>
+        <button class="saveFeedbackBtn">Save Feedback</button>
+      </div>
+      <div><strong>Feedback:</strong><div class="feedbackDisplay"></div></div>
+    `;
+    weeksContainer.appendChild(div);
+
+    const weekKey = `week${week}`;
+    const weekData = studentData[weekKey] || {};
+
+    const classworkBtn = div.querySelector(".uploadClassworkBtn");
+    const homeworkBtn = div.querySelector(".uploadHomeworkBtn");
+    const submitBtn = div.querySelector(".submitHomeworkBtn");
+    const feedbackBtn = div.querySelector(".saveFeedbackBtn");
+
+    const classworkFileInput = div.querySelector(".classworkFile");
+    const homeworkFileInput = div.querySelector(".homeworkFile");
+    const studentHomeworkInput = div.querySelector(".studentHomeworkFile");
+    const feedbackInput = div.querySelector(".feedbackInput");
+    const feedbackDisplay = div.querySelector(".feedbackDisplay");
+    const classworkLinkEl = div.querySelector(".classworkLink");
+    const homeworkLinkEl = div.querySelector(".homeworkLink");
+    const submittedHomeworkLinkEl = div.querySelector(".submittedHomeworkLink");
+    const submissionListEl = div.querySelector(".submissionList");
+    const adminSubmissionListEl = div.querySelector(".adminSubmissionList");
+    // Load existing data
+    if (weekData.classwork) classworkLinkEl.innerHTML = `<a href="${weekData.classwork}" target="_blank">View PDF</a>`;
+    else classworkLinkEl.textContent = "No file";
+    if (weekData.homework) homeworkLinkEl.innerHTML = `<a href="${weekData.homework}" target="_blank">View PDF</a>`;
+    else homeworkLinkEl.textContent = "No file";
+    if (weekData.feedback) feedbackDisplay.innerHTML = weekData.feedback;
+if (Array.isArray(weekData.submittedHomework)) {
+  const latest = weekData.submittedHomework
+    .sort((a, b) => b.submittedAt - a.submittedAt)[0];
+
+  if (latest) {
+    const time = new Date(latest.submittedAt).toLocaleString();
+
+    // Admin view
+    if (role === "admin") {
+      submittedHomeworkLinkEl.innerHTML = `
+        <a href="${latest.url}" target="_blank">View latest submission</a>
+        <br><small>Submitted: ${time}</small>
+      `;
+    }
+
+    // Student view
+    const studentLinkEl = div.querySelector(".studentSubmissionLink");
+    if (studentLinkEl) {
+      studentLinkEl.innerHTML = `
+        <a href="${latest.url}" target="_blank">View your latest submission</a>
+        <br><small>Submitted: ${time}</small>
+      `;
+    }
+  }
+}
+
+// Student submission history
+if (role === "student" && Array.isArray(weekData.submittedHomework) && weekData.submittedHomework.length)
+ {
+  submissionListEl.innerHTML = "";
+
+  weekData.submittedHomework
+    .sort((a, b) => b.submittedAt - a.submittedAt)
+    .forEach(sub => {
+      const li = document.createElement("li");
+      const date = new Date(sub.submittedAt).toLocaleString();
+
+      li.innerHTML = `
+        <a href="${sub.url}" target="_blank">${sub.filename}</a>
+        <br><small>Submitted on ${date}</small>
+      `;
+      submissionListEl.appendChild(li);
+    });
+} else if (submissionListEl) {
+  submissionListEl.innerHTML = "<li>No submissions yet</li>";
+}
+
+// Admin submission history (same as student, but for admin)
+if (
+  role === "admin" &&
+  Array.isArray(weekData.submittedHomework) &&
+  weekData.submittedHomework.length
+) {
+  adminSubmissionListEl.innerHTML = "";
+
+  weekData.submittedHomework
+    .sort((a, b) => b.submittedAt - a.submittedAt)
+    .forEach(sub => {
+      const li = document.createElement("li");
+      const date = new Date(sub.submittedAt).toLocaleString();
+
+      li.innerHTML = `
+        <a href="${sub.url}" target="_blank">${sub.filename}</a>
+        <br><small>Submitted on ${date}</small>
+      `;
+      adminSubmissionListEl.appendChild(li);
+    });
+} else if (adminSubmissionListEl) {
+  adminSubmissionListEl.innerHTML = "<li>No submissions yet</li>";
+}
+
+
+    // Admin uploads
+    classworkBtn?.addEventListener("click", async () => {
+      if (!classworkFileInput.files.length) return alert("Select a file");
+      const file = classworkFileInput.files[0];
+      const path = `students/${studentId}/${subject}/week${week}/classwork/${file.name}`;
+      const url = await uploadFileSupabase(file, path);
+      await setDoc(subjectRef, { [weekKey]: { ...weekData, classwork: url } }, { merge: true });
+      classworkLinkEl.innerHTML = `<a href="${url}" target="_blank">View PDF</a>`;
+      alert("Classwork uploaded");
+    });
+
+    homeworkBtn?.addEventListener("click", async () => {
+      if (!homeworkFileInput.files.length) return alert("Select a file");
+      const file = homeworkFileInput.files[0];
+      const path = `students/${studentId}/${subject}/week${week}/homework/${file.name}`;
+      const url = await uploadFileSupabase(file, path);
+      const freshWeekData = await getFreshWeekData(subjectRef, weekKey);
+
+await setDoc(subjectRef, {
+  [weekKey]: {
+    ...freshWeekData,
+    homework: url
+  }
+}, { merge: true });
+
+      homeworkLinkEl.innerHTML = `<a href="${url}" target="_blank">View PDF</a>`;
+      alert("Homework uploaded");
+    });
+
+    // Student submits homework
+submitBtn?.addEventListener("click", async () => {
+  if (role !== "student") return;
+  if (!studentHomeworkInput.files.length) return alert("Select a file");
+
+  const file = studentHomeworkInput.files[0];
+  const timestamp = Date.now();
+  const path = `students/${studentId}/${subject}/week${week}/submitted_homework/${timestamp}_${file.name}`;
+  const url = await uploadFileSupabase(file, path);
+
+  const newSubmission = {
+    url,
+    filename: file.name,
+    submittedAt: timestamp
+  };
+
+  // Get fresh data from Firestore
+  const freshWeekData = await getFreshWeekData(subjectRef, weekKey);
+  const existingSubmissions = Array.isArray(freshWeekData.submittedHomework)
+    ? freshWeekData.submittedHomework
+    : [];
+
+  const updatedWeekData = {
+    ...freshWeekData,
+    submittedHomework: [...existingSubmissions, newSubmission]
+  };
+
+  // Update Firestore
+  await setDoc(subjectRef, { [weekKey]: updatedWeekData }, { merge: true });
+
+  // Render latest submission for both student and admin
+  const latest = updatedWeekData.submittedHomework
+    .sort((a,b)=>b.submittedAt - a.submittedAt)[0];
+  const time = new Date(latest.submittedAt).toLocaleString();
+
+  const studentLinkEl = div.querySelector(".studentSubmissionLink");
+  if (studentLinkEl) {
+    studentLinkEl.innerHTML = `
+      <a href="${latest.url}" target="_blank">View your latest submission</a>
+      <br><small>Submitted: ${time}</small>
+    `;
+  }
+
+  const submittedHomeworkLinkEl = div.querySelector(".submittedHomeworkLink");
+  if (submittedHomeworkLinkEl) {
+    submittedHomeworkLinkEl.innerHTML = `
+      <a href="${latest.url}" target="_blank">View latest submission</a>
+      <br><small>Submitted: ${time}</small>
+    `;
+  }
+
+  // Update student submission history
+  if (submissionListEl) {
+    submissionListEl.innerHTML = "";
+    updatedWeekData.submittedHomework
+      .sort((a,b)=>b.submittedAt-a.submittedAt)
+      .forEach(sub => {
+        const li = document.createElement("li");
+        const date = new Date(sub.submittedAt).toLocaleString();
+        li.innerHTML = `<a href="${sub.url}" target="_blank">${sub.filename}</a><br><small>Submitted on ${date}</small>`;
+        submissionListEl.appendChild(li);
+      });
+  }
+
+  alert("Homework submitted");
+});
+
+
+
+    // Admin saves feedback
+    feedbackBtn?.addEventListener("click", async () => {
+      const feedbackHtml = feedbackInput.value;
+      await setDoc(subjectRef, { [weekKey]: { ...weekData, feedback: feedbackHtml } }, { merge: true });
+      feedbackDisplay.innerHTML = feedbackHtml;
+      alert("Feedback saved");
+    });
+  } // END OF WEEK 12 LOOP
+  
+  // ========== CREATE TABS AFTER ALL WEEKS ARE BUILT ==========
+  createWeekTabs();
+  
+}); // END OF onAuthStateChanged
+
+// ========== TAB CREATION FUNCTION ==========
+// ========== TAB CREATION FUNCTION ==========
+function createWeekTabs() {
+  const weeksContainer = document.getElementById('weeksContainer');
+  const weekTabsGrid = document.getElementById('weekTabsGrid');
+  const weekContentCards = document.getElementById('weekContentCards');
+  const noWeekSelected = document.getElementById('noWeekSelected');
+  
+  if (!weeksContainer || !weekTabsGrid) {
+    console.error('Missing required elements!');
+    return;
+  }
+  
+  // Get all existing week elements
+  const weekElements = weeksContainer.querySelectorAll('.week');
+  if (weekElements.length === 0) {
+    console.error('No week elements found!');
+    return;
+  }
+  
+  console.log(`Found ${weekElements.length} week elements`);
+  
+  // Create week tabs and content cards
+  weekElements.forEach((weekEl, index) => {
+    const weekNumber = index + 1;
+    
+    // Check if week has content
+    const hasContent = weekEl.textContent.includes('View PDF') || 
+                      (weekEl.querySelector('.studentSubmissionLink') && 
+                       weekEl.querySelector('.studentSubmissionLink').textContent.includes('View')) ||
+                      !weekEl.textContent.includes('No submissions yet');
+    
+    // Calculate approximate date for this week
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() + (weekNumber - 1) * 7);
+    const month = startDate.toLocaleString('default', { month: 'short' });
+    const day = startDate.getDate();
+    
+    // Create week tab (large centered button)
+    const tabBtn = document.createElement('button');
+    tabBtn.className = 'week-tab-large';
+    tabBtn.type = 'button';
+    tabBtn.dataset.week = weekNumber;
+    
+    tabBtn.innerHTML = `
+      <div class="week-icon-large">${weekNumber}</div>
+      <div class="week-label">Week ${weekNumber}</div>
+      <div class="week-date">${month} ${day}</div>
+      ${hasContent ? '<div class="content-badge"></div>' : ''}
+    `;
+    
+    if (hasContent) {
+      tabBtn.classList.add('has-content');
+    }
+    
+    // Create week content card
+    const contentCard = document.createElement('div');
+    contentCard.className = 'week-content-card';
+    contentCard.dataset.week = weekNumber;
+    
+    // Create a structured content card
+    contentCard.innerHTML = `
+      <div class="week-content-header">
+        <h4><i class="fas fa-calendar-day"></i> Week ${weekNumber} Content</h4>
+        <div class="week-stats">
+          ${hasContent ? '<div class="stat-item"><i class="fas fa-check-circle"></i> Content Available</div>' : ''}
+          <div class="stat-item"><i class="fas fa-clock"></i> ${month} ${day}</div>
+        </div>
+      </div>
+      <div class="week-details">
+        ${weekEl.innerHTML}
+      </div>
+    `;
+    
+    // Add click event to tab
+    tabBtn.addEventListener('click', function() {
+      console.log(`Clicked Week ${this.dataset.week}`);
+      
+      // Hide "no week selected" message
+      if (noWeekSelected) {
+        noWeekSelected.style.display = 'none';
+      }
+      
+      // Remove active class from all tabs
+      document.querySelectorAll('.week-tab-large').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      
+      // Remove active class from all content cards
+      document.querySelectorAll('.week-content-card').forEach(card => {
+        card.classList.remove('active');
+      });
+      
+      // Add active class to clicked tab and its content
+      this.classList.add('active');
+      const weekCard = document.querySelector(`.week-content-card[data-week="${this.dataset.week}"]`);
+      if (weekCard) {
+        weekCard.classList.add('active');
+        
+        // Scroll to content smoothly
+        weekCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      
+      // Update URL hash
+      window.location.hash = `week-${this.dataset.week}`;
+    });
+    
+    // Add to containers
+    weekTabsGrid.appendChild(tabBtn);
+    weekContentCards.appendChild(contentCard);
+  });
+  
+  // Hide the original weeks container
+  weeksContainer.style.display = 'none';
+  
+  // Show "no week selected" message by default
+  if (noWeekSelected) {
+    noWeekSelected.style.display = 'block';
+  }
+  
+  console.log('Week tabs created successfully!');
+  
+  // Check URL hash for specific week
+  const hash = window.location.hash;
+  if (hash && hash.startsWith('#week-')) {
+    const weekNum = parseInt(hash.replace('#week-', ''));
+    if (weekNum >= 1 && weekNum <= 12) {
+      // Hide "no week selected" message
+      if (noWeekSelected) {
+        noWeekSelected.style.display = 'none';
+      }
+      
+      // Activate the tab from URL
+      const tabToActivate = document.querySelector(`.week-tab-large[data-week="${weekNum}"]`);
+      const contentToShow = document.querySelector(`.week-content-card[data-week="${weekNum}"]`);
+      
+      if (tabToActivate && contentToShow) {
+        tabToActivate.classList.add('active');
+        contentToShow.classList.add('active');
+      }
+    }
+  }
+}
+</script>
+</body>
+</html>
