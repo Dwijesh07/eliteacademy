@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elite Academy — Login</title>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+/* ===== Theme tokens - ELITE ACADEMY PREMIUM ===== */
+:root {
+  /* Core Colors - Navy & Gold Premium Palette */
+  --navy: #0A2463;           /* Primary brand - Deep Navy */
+  --navy-dark: #06193d;      /* Darker navy for hover */
+  --navy-light: #1E3A8A;     /* Lighter navy variant */
+  --gold: #D4AF37;           /* Premium gold accent */
+  --gold-dark: #B08C1C;      /* Darker gold for hover */
+  --gold-light: #FFD700;     /* Bright gold highlight */
+  
+  /* Supporting Colors */
+  --cream: #F8F5EE;          /* Cream background */
+  --light-gray: #F8F9FA;     /* Light gray for cards */
+  --charcoal: #2D3748;       /* Dark gray for text */
+  --muted: #64748b;          /* Muted text */
+  --teal: #2D9CA3;           /* Accent for CTAs/buttons */
+  --teal-dark: #1F7A80;      /* Darker teal */
+  
+  /* UI Elements */
+  --text: #1E293B;           /* Main text color */
+  --bg: #FFFFFF;             /* Main background */
+  --border: #E5E7EB;         /* Border color */
+  
+  /* Effects */
+  --card-radius: 12px;       /* Increased for premium feel */
+  --btn-radius: 8px;         /* Slightly rounded buttons */
+  --shadow-soft: 0 4px 20px rgba(10, 36, 99, 0.08);  /* Navy-tinted shadow */
+  --shadow-card: 0 10px 30px rgba(10, 36, 99, 0.15); /* Deeper shadow */
+  --shadow-gold: 0 4px 15px rgba(212, 175, 55, 0.2); /* Gold glow */
+}
+
+* { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
+
+body, html { 
+  height: 100%; 
+  font-family: 'Inter', 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; 
+  background: var(--cream); 
+  color: var(--text); 
+  line-height: 1.6;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.login-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+  z-index: 1;
+}
+
+.login-box {
+  background: #fff;
+  padding: 48px 40px;
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow-card);
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  border: 1px solid rgba(229, 231, 235, 0.5);
+  animation: fadeIn 0.6s ease forwards;
+}
+
+.login-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--navy), var(--gold));
+  border-radius: var(--card-radius) var(--card-radius) 0 0;
+}
+
+.login-header {
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.premium-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: var(--navy);
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-gold);
+}
+
+.login-box h2 {
+  margin-bottom: 12px;
+  font-size: 32px;
+  color: var(--navy);
+  font-weight: 900;
+  letter-spacing: -0.5px;
+}
+
+.login-tagline {
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+form { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 16px; 
+}
+
+.form-group {
+  text-align: left;
+  margin-bottom: 4px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--navy);
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-group label i {
+  color: var(--gold);
+  font-size: 14px;
+}
+
+input {
+  padding: 14px 16px;
+  border-radius: var(--btn-radius);
+  border: 2px solid var(--border);
+  font-size: 16px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  width: 100%;
+  background: white;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--navy);
+  box-shadow: 0 0 0 3px rgba(10, 36, 99, 0.1);
+}
+
+.error-msg {
+  color: var(--error);
+  font-size: 13px;
+  text-align: left;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+button[type="submit"] {
+  padding: 16px;
+  background: linear-gradient(135deg, var(--navy), var(--navy-light));
+  color: #fff;
+  border: none;
+  border-radius: var(--btn-radius);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+button[type="submit"]::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.7s ease;
+}
+
+button[type="submit"]:hover {
+  background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(10, 36, 99, 0.2);
+}
+
+button[type="submit"]:hover::after {
+  left: 100%;
+}
+
+button[type="submit"] i {
+  font-size: 18px;
+}
+
+/* Additional Links */
+.login-links {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.forgot-password,
+.register-link {
+  color: var(--muted);
+  font-size: 15px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.forgot-password:hover,
+.register-link:hover {
+  color: var(--navy);
+  text-decoration: underline;
+}
+
+/* Brand Logo */
+.brand-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--navy);
+}
+
+.brand-logo span {
+  color: var(--gold);
+}
+
+.brand-tagline {
+  font-size: 14px;
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 30px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+/* Loading State */
+button[type="submit"].loading {
+  position: relative;
+  color: transparent;
+}
+
+button[type="submit"].loading::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .login-box {
+    padding: 40px 30px;
+    max-width: 400px;
+  }
+  
+  .login-box h2 {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 16px;
+  }
+  
+  .login-box {
+    padding: 36px 24px;
+  }
+  
+  .login-box h2 {
+    font-size: 24px;
+  }
+  
+  input, button[type="submit"] {
+    padding: 12px 14px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="login-container">
+  <div class="login-box">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <input type="email" name="email" placeholder="Email Address" required>
+      <div class="error-msg" id="emailError"></div>
+
+      <input type="password" name="password" placeholder="Password" required>
+      <div class="error-msg" id="passwordError"></div>
+
+      <button type="submit">Login</button>
+    </form>
+  </div>
+</div>
+<body></body>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDFNh_CcKfvrffJUMIHxSJt7TUJl9J4gqk",
+    authDomain: "elite-academy-b7316.firebaseapp.com",
+    projectId: "elite-academy-b7316",
+    storageBucket: "elite-academy-b7316.firebasestorage.app",
+    messagingSenderId: "6198323262",
+    appId: "1:6198323262:web:6e6d546af3fdc5a48a496f"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  const emailInput = document.querySelector('input[name="email"]');
+  const passwordInput = document.querySelector('input[name="password"]');
+
+  document.getElementById("loginForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    try {
+      const email = emailInput.value;
+      const password = passwordInput.value;
+
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const uid = userCredential.user.uid;
+
+      const userRef = doc(db, "users", uid);
+      const userSnap = await getDoc(userRef);
+
+      if (!userSnap.exists()) {
+        alert("User profile not found.");
+        return;
+      }
+
+      const userData = userSnap.data();
+
+      // 🔐 ROLE CHECK
+      if (userData.role === "admin") {
+        window.location.href = "/admindashboard.html";
+      } else {
+        window.location.href = "/dashboard.html";
+      }
+
+    } catch (error) {
+      alert(error.message);
+      console.error(error);
+    }
+  });
+</script>
+
+
+</body>
+</html>
